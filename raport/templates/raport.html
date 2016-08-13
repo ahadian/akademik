@@ -1,0 +1,66 @@
+{% extends "layout/base-siswa.html" %}
+{% block content %}
+
+
+    <div class="table-responsive">
+        <h2 class="panel-heading" style="text-align: center; background-color: #00d6b2; color: white;"><b>Nilai</b></h2>
+        <div class="row">
+            <div class="panel panel-heading">
+                <div class="col-sm-6" style="background-color: #00d6b2">
+                    <form class="form" action='/lihat-nilai/' method="POST" style="margin-right: 3px">
+                    FILTER DATA    :
+                    {% csrf_token %}
+
+
+                        {% if sms %}
+                            <select id="sm" name="data-semester" class="button btn-instagram btn ">
+                                {% for sis in sms %}
+
+                                        <option value="{{ sis.semester }}">Semester {{ sis.semester }}</option>
+
+                                {% endfor %}
+                            </select>
+                        {% endif %}
+                    <input type="submit" value="Tampilkan" class="btn button btn-primary">
+                </form>
+                </div>
+                <div class="col-sm-6" style="background-color: #1ab7ea">
+
+                </div>
+            </div>
+
+        </div>
+        <table class="table table-bordered table-hover table-striped">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <td>Mapel</td>
+                    <td>Pengampu</td>
+                    <td>Kelas</td>
+                    <td>Harian</td>
+                    <td>UTS</td>
+                    <td>UAS</td>
+                </tr>
+            </thead>
+            <tbody>
+            {% csrf_token %}
+            {% if nilai %}
+                {% for re in nilai %}
+                <tr>
+
+                        <td>{{ forloop.counter }}</td>
+                        <td>{{ re.id_mapel }}</td>
+                        <td>{{ re.id_guru }}</td>
+                        <td>{{ re.id_kelas }}</td>
+                        <td>{{ re.harian }}</td>
+                        <td>{{ re.uts }}</td>
+                        <td>{{ re.uas }}</td>
+
+                </tr>
+                {% endfor %}
+            {% endif %}
+            </tbody>
+        </table>
+    </div>
+    <!-- /.table-responsive -->
+{% endblock %}

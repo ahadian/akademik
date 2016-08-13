@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<htmL>
+    <head>
+
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="description" content="">
+        <meta name="author" content="">
+
+        <link href="/static/vendors/sb-admin/dist/css/login.css" rel="stylesheet">
+
+        <title>LOGIN SISWA</title>
+
+    </head>
+    <body class="tampilan">
+        <form action="/login-siswa/" method="POST">
+
+
+            <div class="login-page">
+                <div class="form">
+                    <form class="login-form">
+                        <h1>LOGIN SISWA</h1>
+                        {% csrf_token %}
+                        {% if messages %}
+                            {% for message in messages %}
+                              <li>{{ message }}</li>
+                            {% endfor %}
+                        {% endif %}
+                        <br/>
+                        <input type="text" name="username" value="" placeholder="Silahkan masukkan username..." />
+                        <input type="password" name="password" value="" placeholder="Silahkan masukkan password..." />
+                        <button>Login</button>
+                        <p/>
+                        <a href="/" role="button">Cancel</a>
+                     </form>
+
+              </div>
+            </div>
+
+        </form>
+
+
+    </body>
+</htmL>

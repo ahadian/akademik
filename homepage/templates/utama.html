@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    {% include "css.html" %}
+
+    <title>Sistem Informasi Akademik</title>
+</head>
+<body>
+    <nav class="navbar panel-transparan navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                    <span class="sr-only">Toggle Navigation</span>
+                    <span class="glyphicon glyphicon-th"></span>
+
+                </button>
+                <a class="navbar-brand" href="/">SIKADU</a>
+            </div>
+            <div id="navbar" class="navbar-collapse collapse">
+          <ul class="nav navbar-nav">
+            <li class="active"><a href="/">Home</a></li>
+            <li><a href="#about">About</a></li>
+          </ul>
+          <ul class="nav navbar-nav navbar-right">
+
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                  <span class="glyphicon glyphicon-user"></span>
+                  LOGIN
+                  <span class="caret"></span>
+              </a>
+
+              <ul class="dropdown-menu">
+                <li><a href="/profil-siswa/">Siswa</a></li>
+                <li><a href="/profil-guru/">Guru</a></li>
+              </ul>
+            </li>
+          </ul>
+        </div><!--/.nav-collapse -->
+        </div>
+    </nav>
+
+        <!-- Main jumbotron for a primary marketing message or call to action -->
+    <div class="jumbotron panel-broton">
+      <div class="container">
+        <h1>Sistem Informasi Akademik</h1>
+        <p>Merupakan Sebuah Sistem Informasi Akademik yang dibuat Menggunakan Django</p>
+          <br/>
+          <p>
+              <a class="btn tombol btn-lg" href="/profil-siswa/" role="button"><span class="glyphicon glyphicon-user"></span> LOGIN SISWA</a>
+              <a class="btn tombol btn-lg" href="/profil-guru/" role="button"><span class="glyphicon glyphicon-user"></span> LOGIN GURU</a>
+          </p>
+      </div>
+    </div>
+
+    <footer class="afooter">
+        <div class="container">
+        <p> &copy; <a href="http://github.com/arissupriy/"> Aris Supriyanto</a></p>
+      </div>
+    </footer>
+
+    {% include "js.html" %}
+</body>
+</html>

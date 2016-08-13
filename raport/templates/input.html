@@ -1,0 +1,119 @@
+{% extends "layout/base.html" %}
+{% block content %}
+    <div class="row">
+        <div class="col-lg-12">
+            <h1 class="page-header" style="text-align: center;"> Input Nilai Siswa</h1>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="panel panel-default">
+                <div class="panel-heading" style="text-align: center;">
+                    <i class="glyphicon glyphicon-globe"></i> Silakan Input Nilai Siswa
+                </div>
+                <div class="panel-body">
+
+                    <!-- DISINI DIKASIH FORM ERROR YA? -->
+                    <form action="/input/"  method="POST" role="form">
+                        {% csrf_token %}
+
+                            <div class="form-group">
+                                <label for="kelas">Kelas : </label>
+                                {% if mapel %}
+                                <select name="kelas" class="button btn-instagram btn ">
+                                    {% for nama in mapel %}
+                                    <option value="{{ nama.kelas_id }}">{{ nama.kelas }}</option>
+                                    {% endfor %}
+                                </select>
+                                {% endif %}
+                            </div>
+                            <div class="form-group">
+                            <label for="mapel">NIP : </label>
+                                {% if nip %}
+                                    {% for nama in nip  %}
+                                        <input type="text" class="form-control" name="nama_guru" value="Nip : {{ nama.nip }}, Nama : {{ nama.nama }}" readonly>
+                                        <input type="hidden" class="form-control" name="id_guru" value="{{ nama.nip }}" readonly>
+                                    {% endfor %}
+                                {% endif %}
+
+                            </div>
+
+                            <div class="form-group">
+                                <label for="tapel">Tahun Pelajaran </label>
+                                <select name="tahun_ajaran" class="button btn-instagram btn ">
+                                    <option value="2015/2016">2015/2016</option>
+                                    <option value="2016/2017">2016/2017</option>
+                                </select>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="semester">Semester : </label>
+                                <select name="semester" class="button btn-instagram btn ">
+                                    <option value="1">1</option>
+                                    <option value="2">2</option>
+                                </select>
+                            </div>
+
+                            <div class="form-group">
+                            <label for="mapel">Mata Pelajaran : </label>
+                                {% if mapel %}
+                                <select name="mapel" class="button btn-instagram btn ">
+                                    {% for nama in mapel %}
+                                    <option value="{{ nama.mapel_id }}">{{ nama.mapel }}</option>
+                                    {% endfor %}
+                                </select>
+                                {% endif %}
+                            </div>
+
+                            <div class="form-group">
+                                <label for="kelas">Kelas : </label>
+                                {% if mapel %}
+                                <select name="kelas" class="button btn-instagram btn ">
+                                    {% for nama in mapel %}
+                                    <option value="{{ nama.kelas_id }}">{{ nama.kelas }}</option>
+                                    {% endfor %}
+                                </select>
+                                {% endif %}
+                            </div>
+
+                            <div class="form-group">
+                                <label>NIS : </label>
+                                {% if siswa %}
+                                <select name="id_siswa" class="button btn-instagram btn ">
+                                    {% for nama in siswa %}
+                                    <option value="{{ nama.nis }}">{{ nama.nis }}</option>
+                                    {% endfor %}
+                                </select>
+                                {% endif %}
+                            </div>
+
+                            <div class="form-group">
+                                <label for="nama">Nama Siswa : </label>
+                                <input type="text" class="form-control" id="nama">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="harian">Nilai Harian : </label>
+                                <input type="number" class="form-control" id="harian" name="harian">
+                            </div>
+                            <div class="form-group">
+                                <label for="uts">Nilai UTS : </label>
+                                <input type="number" class="form-control" id="uts" name="uts">
+                            </div>
+                            <div class="form-group">
+                                <label for="uas">Nilai UAS : </label>
+                                <input type="number" class="form-control" id="uas" name="uas">
+                            </div>
+
+
+                        <br/>
+                        <input type="submit" value="Submit" />
+                            <button type="reset" class="btn btn-danger"><i class="glyphicon glyphicon-back"></i> Reset</button>
+                            <a class="btn btn-lg" href="/input-nilai/" role="button">Cancel</a>
+
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

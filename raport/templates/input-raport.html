@@ -1,0 +1,228 @@
+{% extends "layout/base.html" %}
+{% block content %}
+    <div class="row">
+        <div class="col-lg-12">
+            <h1 class="page-header" >Input Nilai Siswa</h1>
+            <ol class="breadcrumb" style="margin-bottom: 5px">
+                <li> <a href="/profil-guru/">Profil</a> </li>
+                <li class="active">Input Nilai</li>
+
+            </ol>
+            <br/>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <i class="fa fa-bar-chart-o fa-fw"></i> Silahkan Input Nilai Siswa
+                    <a class="btn btn-default btn-lg" href="/input/" role="button"><span class="glyphicon glyphicon-ok-circle"></span> Input Sekarang</a>
+                </div>
+                <p>
+                <div class="panel-body">
+                <form class="form" action='/input-nilai/' method="POST">
+                    FILTER DATA    :
+                    {% csrf_token %}
+                        {% if mapel %}
+                            <select name="nama_kelas" class="button btn-instagram btn ">
+                                {% for nama in mapel %}
+                                <option value="{{ nama.kelas_id }}">{{ nama.kelas }}</option>
+                                {% endfor %}
+                            </select>
+                            <select name="nama_mapel" class="button btn-instagram btn ">
+                                {% for nama in mapel %}
+                                <option value="{{ nama.mapel_id }}">{{ nama.mapel }}</option>
+                                {% endfor %}
+                            </select>
+                        {% endif %}
+                    <input type="submit" value="Tampilkan" class="btn button btn-primary">
+                </form>
+                </div>
+
+                <h3 class="panel-heading" style="text-align: center; background-color: #2aabd2; color: white">
+                    NILAI SISWA
+                </h3>
+
+
+
+
+                <table class="table-responsive">
+                    <table class="table table-bordered table-hover table-striped" >
+                        <thead>
+                            <tr style="background-color: #5bc0de; text-align: center">
+                                <td>No</td>
+                                <td>NIS</td>
+                                <td>Nama Siswa</td>
+                                <td>Kelas</td>
+                                <td>Mapel</td>
+                                <td>Semester</td>
+                                <td>Tahun Ajaran</td>
+                                <td>Harian</td>
+                                <td>UTS</td>
+                                <td>UAS</td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                        </thead>
+                        <tbody>
+
+                            {% csrf_token %}
+                            {% if siswa %}
+                                {% for sis in siswa %}
+                                    <tr id="data-nilai" style="text-align: center;" >
+                                        <td style="background-color: #2795e9;">{{ forloop.counter }}</td>
+                                        <td> {{ sis.id_siswa_id }} </td>
+                                        <td>{{ sis.id_siswa.nama}}</td>
+                                        <td>{{ sis.id_kelas.nama_kelas }}</td>
+                                        <td>{{ sis.id_mapel }}</td>
+                                        <td>{{ sis.semester }}</td>
+                                        <td>{{ sis.tahun_ajaran }}</td>
+                                        <td>{{ sis.harian }}</td>
+                                        <td>{{ sis.uts }}</td>
+                                        <td>{{ sis.uas }}</td>
+
+                                        <!-- Update Button -->
+                                        <td>
+                                            <!-- for open modal dialog -->
+                                            <button class="btn btn-warning" data-toggle="modal" data-target="#editModal"
+                                                    data-nis="{{ sis.id_siswa_id }}"
+                                                    data-id="{{ sis.id }}"
+                                                    data-nama="{{ sis.id_siswa.nama }}"
+                                                    data-kelas="{{ sis.id_kelas }}"
+                                                    data-mapel="{{ sis.id_mapel }}"
+                                                    data-semester="{{ sis.semester }}"
+                                                    data-uts="{{ sis.uts }}"
+                                                    data-harian="{{ sis.harian }}"
+                                                    data-uas="{{ sis.uas }}"
+                                                    data-tahun_ajaran="{{ sis.tahun_ajaran }}"><span class="glyphicon glyphicon-edit"></span> Edit</button>
+                                            <!-- Modal -->
+                                            <div id="editModal" class="modal fade" role="dialog">
+                                                <div class="modal-dialog">
+
+                                                <!-- Modal Content -->
+                                                    <div class="modal-content">
+                                                        <div class="modal-header" style="background-color: #00d6b2;">
+                                                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                                            <h2>Edit Data</h2>
+                                                        </div>
+
+
+                                                        <form action="/up/" method="POST">
+                                                            {% csrf_token %}
+                                                            <div class="modal-body">
+                                                                <div class="form-group">
+                                                                    <label for="nis">NIS : </label>
+                                                                    <input id="nis" name="nis" type="text" class="form-control" readonly>
+                                                                </div>
+
+                                                                <div class="form-group">
+                                                                    <label for="nama">Nama : </label>
+                                                                    <input id="nama" type="text" class="form-control" value="{{ sis.id_siswa.nama }}" readonly>
+                                                                </div>
+
+                                                                <div class="form-group">
+                                                                    <label for="nama">Kelas : </label>
+
+                                                                    <input id="kelas" name="kelas" type="text" class="form-control" value="{{ sis.id_kelas }}" readonly>
+                                                                </div>
+
+                                                                <div class="form-group">
+                                                                    <label for="mapel">Mapel : </label>
+                                                                    <input id="mapel" name="mapel" type="text" class="form-control" value="{{ sis.id_mapel }}" readonly>
+                                                                </div>
+
+                                                                <div class="form-group">
+                                                                    <label for="semester">Semester : </label>
+                                                                    <input id="semester" name="semester" type="text" class="form-control" value="{{ sis.semester }}" readonly>
+                                                                </div>
+
+                                                                <div class="form-group">
+                                                                    <label for="tahun_ajaran">Tahun Ajaran : </label>
+                                                                    <input id="tahun_ajaran" name="tahun_ajaran" type="text" class="form-control" >
+                                                                </div>
+
+                                                                <div class="form-group">
+                                                                    <label for="harian">Harian : </label>
+                                                                    <input type="text" class="form-control" name="harian" id="harian" value="{{ sis.harian }}">
+                                                                </div>
+
+                                                                <div class="form-group">
+                                                                    <label for="uts">UTS : </label>
+                                                                    <input type="text" class="form-control" name="uts" id="uts" value="{{ sis.uts }}">
+                                                                </div>
+
+                                                                <div class="form-group">
+                                                                    <label for="uas">UAS : </label>
+                                                                    <input type="text" class="form-control" name="uas" id="uas" value="{{ sis.uas }}">
+                                                                </div>
+
+                                                            </div>
+
+                                                            <div class="modal-footer" style="background-color: #00d6b2;">
+
+                                                                <input type="submit" value="Update" class="btn btn-primary">
+                                                                <input type="hidden" value="{{ sis.id_siswa_id }}" id="nis" name="nis">
+                                                                <input type="hidden" value="{{ sis.semester}}" id="semester" name="semester">
+                                                                <input type="hidden" value="{{ sis.id_mapel_id}}" id="mapel" name="mapel">
+                                                                <input type="hidden" value="{{ sis.id_kelas_id}}" id="kelas" name="kelas">
+                                                                <input type="hidden" value="{{ sis.id }}" name="id" id="id_raport">
+                                                                <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                                                            </div>
+                                                        </form>
+
+                                                    </div>
+                                                </div>
+                                            </div>
+
+
+                                        </td>
+                                        <!-- Delete Button -->
+                                        <td>
+                                            <!-- for open modal -->
+                                            <button class="btn btn-danger" data-toggle="modal" data-nis="{{ sis.id_siswa_id }}" data-id="{{ sis.id }}" data-target="#delModal"><span class="glyphicon glyphicon-trash"></span> Delete</button>
+                                            <!-- Modal -->
+                                            <div id="delModal" class="modal fade" role="dialog">
+                                                <div class="modal-dialog">
+
+                                                <!-- Modal Content -->
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                                            <h2>Modal Header</h2>
+                                                        </div>
+
+                                                        <div class="modal-body">
+                                                            <p id="text"></p>
+                                                        </div>
+
+                                                        <form action="/del/" method="POST">
+
+                                                            <div class="modal-footer">
+                                                                {% csrf_token %}
+                                                                <input type="hidden" id="id_raport" value=" {{ sis.id }}" name="id">
+                                                                <input type="submit" value="Delete" class="btn btn-danger" id="delete">
+                                                                <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                                                        </div>
+                                                        </form>
+
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                        </td>
+                                        </tr>
+                                {% endfor %}
+                             {% else %}
+                                <td colspan="7" style="text-align: center;">Tidak Ada data siswa</td>
+                            {% endif %}
+                        </tbody>
+                    </table>
+                </table>
+
+
+
+                </p>
+            </div>
+        </div>
+    </div>
+{% endblock %}

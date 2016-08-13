@@ -1,0 +1,57 @@
+           {% load filename %}
+            <div class="navbar-default sidebar" role="navigation">
+                <div class="sidebar-nav navbar-collapse" style="background-color: #0b97c4;">
+                    <div class="panel-body" style="background-color: #00b3ee;">
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <div class="kartu" id="foto-siswa" style="width: 200px; height: auto; margin-bottom: 10px; margin-top: 10px; margin-left: auto; margin-right: auto; overflow: hidden;">
+                                    <img src="/media/upload/guru/{{ guru.foto|basename }}" style="width: 200px;"/>
+                                    <div class="container-aris" style="text-align: center">
+                                        <h4>{{ guru.nama }}</h4>
+                                    </div>
+                                    <button id="ganti-foto-button" class="btn btn-facebook" style="position: absolute; top: 160px; margin-left: 48px; display: none;" data-toggle="modal" data-target="#gantiFotoModal">
+                                        <i class="fa fa-photo"></i>
+                                        Ganti Foto
+                                    </button>
+
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="modal fade" id="gantiFotoModal" tabindex="-1" role="dialog" aria-labeledby="myModalLabel" aria-hidden="true">
+                        <div class="modal-dialog">
+                        <form action="/change/" method="POST" enctype="multipart/form-data">
+                            {% csrf_token %}
+                            <div class="modal-header" >
+                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                                <h4 class="modal-title" id="myModalLabel">Ganti Foto</h4>
+
+
+                            </div>
+                            <div class="modal-body" style="background-color: white">
+                                <p>Pilih Foto yang Anda Sukai</p>
+                                <input type="file" name="files"/>
+                            </div>
+                            <div class="modal-footer" style="background-color: #00b3ee">
+                                <button type="button" class="btn btn-default" data-dismiss="modal">Batal</button>
+                                <input type="submit" class="btn btn-primary" value="Upload"/>
+                            </div>
+                        </form>
+                        </div>
+                    </div>
+
+                    <ul class="nav" id="side-menu" style="width: 90%; height: auto; margin-bottom: 10px; margin-top: 10px; margin-left: auto; margin-right: auto; overflow: hidden; background-color: lightskyblue; ">
+                        <li>
+                            <a href="/profil-guru/"><i class="fa fa-dashboard fa-fw"></i> Profil</a>
+                        </li>
+                        <li>
+                            <a href="/input-nilai/"><i class="fa fa-dashboard fa-fw"></i> Input Nilai </a>
+                        </li>
+
+                    </ul>
+                </div>
+                <!-- /.sidebar-collapse -->
+            </div>
+            <!-- /.navbar-static-side -->
